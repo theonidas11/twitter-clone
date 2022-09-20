@@ -1,0 +1,52 @@
+{% extends 'base.html' %}  {% load static %} {% block content %}
+<div class="title">
+  <a href="/">
+    <img src="/static/img/twitter.svg" class="twitter" alt="">
+  </a>
+    <h1>Twitter</h1>
+</div>
+<section class="content">
+    <section class="post_form">
+      <form action='/' method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="Name" required >
+        <textarea type="text" name="body" placeholder="Tell us anything" required></textarea>
+        <input type="file" value="Choose file" name="image" required>
+        <input type="submit" value="Tweet" id="tweet" />
+      </form>
+    </section>
+    <section class="posts">
+     <ul>
+        {% for post in posts %} 
+        <li> 
+            <img class="menu_icon js-menu-icon" src="{% static 'img/option.png' %}" />
+            <div class="menu">
+              <a href="/delete/{{ post.id }}/">Delete</a><br>
+              <a href="/edit/{{post.id}}">Edit</a>
+              </div>
+              <div class="logo"> 
+              <img src="{% static 'img/user.png' %}"/>
+            </div>
+            <div class="name_body">
+              <div class='name'>{{ post.name}}</div>
+              <div class='dateline'> {{ post.created_at }}</div>
+              <p>{{ post.body }}</p>
+              {% if post.image %}
+              <img src="{{post.image.url}}" alt="" style="width: 370px; height: 370px;" class="post-border">
+              {% endif %}
+              <div>
+                <a href="/like/{{post.id}}"><img src="{% static 'img/like.svg' %}" style="width:30px;" alt=""></a>
+              {{post.likes}}
+              </div>
+            </div>
+        </li>
+          {% endfor %}
+     </ul> 
+    </section>
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+     <script src="{% static 'js/posts.js' %}"></script>
+
+
+  </section>
+
+{% endblock %}
