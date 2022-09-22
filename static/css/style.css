@@ -6,6 +6,8 @@ body {
     height: 100%;
 }
 
+
+
 .title{
     display: flex;
     margin: 0 auto;
@@ -24,6 +26,10 @@ body {
 .twitter{
     border-radius: 15px;
     width: 3vw;
+}
+.main{
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
 }
 .content {
     max-width: 600px;
